@@ -3,6 +3,7 @@
 # define PLAYER1 1
 # define PLAYER2 2
 
+# include <string.h>
 # include "libft/includes/libft.h"
 
 typedef struct	s_board
