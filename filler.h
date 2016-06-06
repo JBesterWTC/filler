@@ -11,10 +11,4 @@ typedef struct  s_board
 	char    **map;
 }               t_board;
 
-typedef struct  s_piece
-{
-	int     x;
-	int     y;
-}               t_piece;
-
 #endif
