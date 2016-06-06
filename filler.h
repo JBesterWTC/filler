@@ -8,6 +8,6 @@ typedef struct	s_board
 	int		x;
 	int		y;
 	char	**map;
-}		t_board;
+}				t_board;
 
 #endif
