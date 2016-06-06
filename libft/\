@@ -1,0 +1,96 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_fdf_draw.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tmack <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/05/27 09:29:01 by tmack             #+#    #+#             */
+/*   Updated: 2016/05/31 09:38:45 by tmack            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "fdf.h"
+
+void ft_fdf_draw(t_world *c, int b)
+{
+	
+	
+	int dx, dy, p, end;
+	float  xi, yi;
+
+	
+	dx = abs(c->tempx[b + 1] - c->tempx[b]);
+	dy = abs(c->tempy[b + 1] - c->tempy[b]);
+	p = 2 * dy - dx;
+	
+
+	if ((b) <= c->count)
+	{
+	if (c->tempx[b + 1] > c->tempx[b]) 
+	{
+		xi = c->tempx[b];
+		yi = c->tempy[b];
+		end = c->tempx[b + 1];
+	}
+	else
+	{
+		xi = c->tempx[b + 1];
+		yi = c->tempy[b + 1];
+		end = c->tempx[b];
+	}
+	mlx_pixel_put(c->mlx, c->win, xi, yi, 0xFFFFFF);
+	}
+	else 
+		c->tempx[b + 1] = c->tempx[b];
+	while (xi < end)
+	{
+		xi++;
+		if (p < 0)
+			p = p + 2 * dy;
+		else
+		{
+			yi++;
+			p = p + 2 * (dy - dx);
+		}
+	
+		mlx_pixel_put(c->mlx, c->win, xi, yi, 0xFFFFFF);
+				
+	}
+	int k = c->tempy[b];
+	while  (k < c->tempy[b] + 10  )
+	{
+		mlx_pixel_put(c->mlx, c->win, c->tempx[b], k, 0xFFFF00);
+		k++;
+	}
+/*
+
+		double m, t;
+		float x;
+		int xe;
+		int ye;
+		float y;
+
+		x = c->tempx[b];
+		y = c->tempy[b];
+		xe = c->tempx[b + 1];
+		ye = c->tempy[b + 1];
+
+		if (c->tempx[b] == c->tempx[b + 1])
+		m = 0;
+		else
+		m = (c->tempy[b + 1] - c->tempy[b]) / (double)(c->tempx[b + 1] - c->tempx[b]);
+		t = c->tempy[b] - m * c->tempx[b];
+		if (c->tempx[b + 1] < c->tempx[b] && (x = c->tempx[b + 1]))
+		xe = c->tempx[b];
+	//	while (y <= ye && m == 0 && y++)
+	//	mlx_pixel_put(c->mlx, c->win, x, y - 1 , 0xF00FFFF);
+		while (x <= xe && m != 0 && x++)
+		mlx_pixel_put(c->mlx, c->win, x, m * (x - 1) + t, 0x00FFFF);
+		x = 0;
+
+*/
+}
+
+
+

@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbester <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tmack <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/06 11:00:56 by jbester           #+#    #+#             */
-/*   Updated: 2016/06/06 11:01:03 by jbester          ###   ########.fr       */
+/*   Created: 2016/06/05 15:50:41 by tmack             #+#    #+#             */
+/*   Updated: 2016/06/05 15:50:42 by tmack            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "filler.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+void			*ft_memchr(const void *haystack, int needle, size_t len)
 {
-	int		fd;
-	char 	*lines;
-	char	**grid;
-	int		i = 0;
+	size_t		i;
 
-	fd = open(argv[0], O_RDONLY);
+	i = 0;
+	while (i < len)
+	{
+		if (needle == ((unsigned char*)haystack)[i])
+			return ((void*)haystack + i);
+		i++;
+	}
+	return (NULL);
 }

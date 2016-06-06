@@ -1,0 +1,56 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tmack <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/05/24 17:25:38 by tmack             #+#    #+#             */
+/*   Updated: 2016/06/03 10:16:45 by tmack            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef FDF_H
+# define FDF_H
+
+# include <ctype.h>
+# include "mlx.h"
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include "libft.h"
+# include <fcntl.h>
+# include <math.h>
+
+typedef struct	s_dot
+{
+	double x;
+	double y;
+}				t_dot;
+
+typedef struct	s_world
+{
+	void		*mlx;
+	void		*win;
+	char		*line;
+	char		**lin2;
+	int			fd;
+	int			x;
+	int			y;
+	int			h;
+	double		**temp;
+	int			**tempx;
+	int			*tempy;
+	int			size;
+	int			count;
+	int			dx;
+	int			dy;
+	int			end;
+	int			p;
+	float		xi;
+	float		yi;
+	float		m;
+}				t_world;
+
+void			ft_fdf_draw(t_world *var, int i, int a);
+#endif
