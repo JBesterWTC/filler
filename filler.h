@@ -10,6 +10,8 @@ typedef struct  s_board
 {
 	int     x;
 	int     y;
+	int		max_y;
+	int		max_x;
 	char    **map;
 }               t_board;
 
@@ -22,5 +24,7 @@ typedef struct	s_players
 	char	**opp;
 	char	**me;
 }				t_players;
+
+char	ft_search(char *line, char c);
 
 #endif
