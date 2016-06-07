@@ -18,13 +18,13 @@ typedef struct  s_board
 typedef struct	s_players
 {
 	int		x1;
-	int		x2;
+	int		y1;
 	int		opx;
 	int		opy;
 	char	**opp;
 	char	**me;
 }				t_players;
 
-char	ft_search(char *line, char c);
+char	ft_search(char **grid, char p1, char p2);
 
 #endif
