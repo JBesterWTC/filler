@@ -39,35 +39,116 @@ void	ft_search(char **map, t_player *player, t_board *b)
 		}
 		y++;
 	}
-		close(fd);
+	close(fd);
 }
 
-/*	void	ft_build_quad(t_players pass)
-	{
-		t_board	trap;
-		int		fd;
+int	 piece_quad(t_board *c, t_player *t)
+{
+	float x_2;
+	float y_2;
+	int quad;
 
-		fd = open("text", O_WRONLY | O_APPEND);
-		trap.quad_x = pass.opx;
-		trap.quad_y = pass.opy;
-		while (trap.quad_x != pass.x1)
+	x_2 = c->max_x / 2;
+	y_2 = c->max_y / 2;
+
+	if ((t->pos_p1x > 0 && t->pos_p1x < x_2) && (t->pos_p1y < y_2 && t->pos_p1y > 0))
+		quad = 1;
+	if ((t->pos_p1x > x_2 && t->pos_p1x < c->max_x) && 
+			(t->pos_p1y < y_2 && t->pos_p1y > 0))
+		quad = 2;
+	if ((t->pos_p1x > 0 && t->pos_p1x < x_2) && (t->pos_p1y > y_2 &&
+			   	t->pos_p1y < c->max_y))
+		quad = 3;
+	if ((t->pos_p1x > x_2 && t->pos_p1x < c->max_x) &&
+		   	(t->pos_p1y > y_2 && t->pos_p1y < c->max_y))
+		quad = 4;
+	return (quad);
+}
+
+void piece_check(t_piece *p, t_player *t, t_board *c)
+{
+	int y;
+	int x;
+
+	int placex;
+	int placey;
+	int fd;
+	int quad;
+
+	quad = piece_quad(c, t);
+	fd = open("text", O_WRONLY | O_APPEND);
+	if (quad == 4)
+	{
+		y = c->max_y - 1;
+		while (y > 0)
 		{
-			if ((pass.x1 - trap.quad_x) < 0)
-				trap.quad_x--;
-			else if ((pass.x1 - trap.quad_x) > 0)
-				trap.quad_x++;
+			x = c->max_x - 1;
+			while (x > 0)
+			{
+				if (c->map[y][x] == 'O' || c->map[y][x] == 'o')
+				{
+					placex = x; 
+					placey = y;
+				}
+				x--;
+			}
+			y--;
 		}
-		while (trap.quad_y != pass.y1)
+	}
+	else if (quad == 1)
+	{
+		y = 0;
+		while (y < c->max_y - 1)
 		{
-			if ((pass.y1 - trap.quad_y) < 0)
-				trap.quad_y--;
-			else if ((pass.y1 - trap.quad_y) > 0)
-				trap.quad_y++;
+			x = 0;
+			while (x < c->max_x - 1)
+			{
+				if (c->map[y][x] == 'O' || c->map[y][x] == 'o')
+				{
+					placex = x;
+					placey = y;
+				}
+				x++;
+			}
+			y++;
 		}
-		ft_putstr_fd("Built\n", fd);
-		ft_putnbr_fd(trap.quad_y, fd);
-		ft_putchar_fd('\n', fd);
-		ft_putnbr_fd(trap.quad_x, fd);
-		ft_putchar_fd('\n', fd);
-		close(fd);
-	}*/
+	}
+	else if (quad == 3)
+	{
+		y = c->max_y - 1;
+		while (y > 0)
+		{
+			x = 0;
+			while (x < c->max_x - 1)
+			{
+				if (c->map[y][x] == 'O' || c->map[y][x] == 'o')
+				{
+					placex = x;
+					placey = y;
+				}
+				x++;
+			}
+			y--;
+		}
+	}
+	else if ( quad == 2)
+	{
+		y = 0;
+		while (y < c->max_y - 1)
+		{
+			x = c->max_x - 1;
+			while (x > 0)
+			{
+				if (c->map[y][x] == 'O' || c->map[y][x] == 'o')
+				{
+					placex = x;
+					placey = y;
+				}
+				x--;
+			}
+			y++;
+		}
+	}
+	close (fd);
+}
+

@@ -7,12 +7,15 @@ int main(int argc, char **argv)
 	t_board	c;
 	t_piece p;
 	t_player t;
+	int player;
 	int i = 0;
 	int fd;
 
 	fd = open("text", O_WRONLY | O_APPEND);
 	while (ft_get_next_line(0, &lines) > 0)
 	{
+		if (ft_strcmp("$$$ exec", lines))
+			t.isplayer = ft_save_player(&lines, &t);
 		if (ft_strcmp("Plateau", lines))
 		{
 			ft_get_next_line(0, &lines);
@@ -20,9 +23,9 @@ int main(int argc, char **argv)
 		}
 		if (ft_strcmp("Piece", lines))
 			p.piece = save_piece(&lines, &p);
-		ft_search(c.map, &t, &c);
+		//ft_search(c.map, &t, &c);
+		piece_check(&p, &t, &c);
 		i++;
-		
 	}
 	close (fd);
 }

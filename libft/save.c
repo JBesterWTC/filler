@@ -65,3 +65,29 @@ char        **save_piece(char **line, t_piece *p)
 	close(fd);
 	return (piece);
 }
+
+int ft_save_player(char **line, t_player *player)
+{
+	int     fd;
+	char    **playerline;
+	int     i;
+
+	i = 0;
+	fd = open("text", O_WRONLY | O_APPEND);
+	playerline = ft_strsplit(*line, ' ');
+	if (ft_strcmp(playerline[2], "p1") == 0)
+	{
+		i = 1;
+		ft_putstr_fd("you are player: ", fd);
+		ft_putstr_fd(ft_itoa(i), fd);
+		return (i);
+	}
+	else
+	{
+		ft_putstr_fd("you are player: ", fd);
+		ft_putstr_fd(ft_itoa(i), fd);
+	}
+	free(*playerline);
+	close(fd);
+	return (0);
+}
