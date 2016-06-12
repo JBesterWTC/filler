@@ -1,5 +1,7 @@
-seed = 4758
-O: timedout
-./abanlin.filler won
+seed = 7206
+O: error on input
+./a.out: Segfault at 1
+X: error on input
+./superjeannot.filler won
 Score:
-0AGAINST325
+1AGAINST17

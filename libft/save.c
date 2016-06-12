@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   save.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tmack <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/06/10 11:17:00 by tmack             #+#    #+#             */
+/*   Updated: 2016/06/12 09:22:16 by tmack            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "filler.h"
 
@@ -91,3 +102,43 @@ int ft_save_player(char **line, t_player *player)
 	close(fd);
 	return (0);
 }
+
+
+
+void    move_direction(t_piece *p, t_player *l, t_board *c)
+{
+	int fd;
+	int quad;
+
+	quad = piece_quad(c, l, c->max_x, c->max_y);
+	fd = open("text", O_WRONLY | O_APPEND);
+	if (quad == 4)
+		quad4_search(p_case(l), c->max_x, c->max_y, p, c->map);
+	else if (quad == 1)
+		quad1_search(p_case(l), c->max_x, c->max_y, p, c->map);
+	else if (quad == 3)
+		quad3_search(p_case(l), c->max_x, c->max_y, p, c->map);
+	else if ( quad == 2)
+		quad2_search(p_case(l), c->max_x, c->max_y, p, c->map);
+	close(fd);
+}
+
+/*void piececalc()
+{
+	int fd;
+	int quad;
+
+	quad = piece_quad(c, l, c->max_x, c->max_y);
+	fd = open("text", O_WRONLY | O_APPEND);
+	if (quad == 4)
+		quad4_search('*', c, p);
+	else if (quad == 1)
+		quad3_search('*', c, p);
+	else if (quad == 3)
+		quad3_search('*', c, p);
+	else if ( quad == 2)
+		quad2_search('*', c, p);
+	ft_putstr_fd("bulba: ", fd);
+	ft_putstr_fd(ft_itoa(quad), fd);
+	close(fd);
+}*/

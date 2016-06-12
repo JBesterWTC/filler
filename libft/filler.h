@@ -10,6 +10,8 @@ typedef struct  s_board
 	int     max_x;
 	int     max_y;
 	char    **map;
+	float		x_2;
+	float		y_2;
 }               t_board;
 
 typedef struct	s_piece
@@ -32,10 +34,15 @@ typedef struct	s_player
 	int		found_p2; 
 }				t_player;
 
-int 	piece_quad(t_board *c, t_player *t);
+char p_case(t_player *c);
+int quad1_search(char ch, int max_x, int max_y , t_piece *p, char **map);
+int quad2_search(char ch, int max_x, int max_y , t_piece *p, char **map);
+int quad3_search(char ch, int max_x, int max_y , t_piece *p, char **map);
+int quad4_search(char ch, int max_x, int max_y , t_piece *p, char **map);
+int 	piece_quad(t_board *c, t_player *t, int max_x, int max_y);
 void    ft_search(char **map, t_player *player, t_board *b);
 char	**save_map(char **line, t_board *c);
 char	**save_piece(char **line, t_piece *p);
 int		ft_save_player(char **line, t_player *player);
-void	piece_check(t_piece *p, t_player *t, t_board *c);
+void	move_direction(t_piece *p, t_player *t, t_board *c);
 #endif
